@@ -34,6 +34,28 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
     }
 
+    // ---------- FASE 6: MANTENER EL ESTADO AL GIRAR ----------
+
+    override fun onSaveInstanceState(estado: Bundle) {
+        super.onSaveInstanceState(estado)
+        // Guardamos el estado antes de que la actividad se destruya
+        estado.putString("RESULTADO", binding.textResultado.text.toString())
+        estado.putString("OPERACION_TEXTO", binding.textOperacion.text.toString())
+        estado.putDouble("PRIMER_NUMERO", primerNumero)
+        estado.putInt("OPERACION", operacion)
+        estado.putBoolean("NUMERO_NUEVO", empezarNumeroNuevo)
+    }
+
+    override fun onRestoreInstanceState(estado: Bundle) {
+        super.onRestoreInstanceState(estado)
+        // Recuperamos el estado al volver a crear la actividad
+        binding.textResultado.text = estado.getString("RESULTADO")
+        binding.textOperacion.text = estado.getString("OPERACION_TEXTO")
+        primerNumero = estado.getDouble("PRIMER_NUMERO")
+        operacion = estado.getInt("OPERACION")
+        empezarNumeroNuevo = estado.getBoolean("NUMERO_NUEVO")
+    }
+
     override fun onStart() {
         super.onStart()
         // Números
