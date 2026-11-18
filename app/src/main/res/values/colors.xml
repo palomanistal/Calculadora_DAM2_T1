@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Calculadora · Paleta Nude latte -->
+    <color name="fondo">#FFF3E8DD</color>
+    <color name="texto_pantalla">#FF4A382D</color>
+    <color name="texto_operacion">#FF8F7666</color>
+
+    <color name="boton_numero">#FFE6D3C1</color>
+    <color name="boton_funcion">#FFD6B8A3</color>
+    <color name="boton_cientifico">#FFE3C7BA</color>
+    <color name="boton_operador">#FFC98B76</color>
+    <color name="boton_igual">#FFA8644F</color>
+
+    <color name="texto_boton">#FF4A382D</color>
+    <color name="texto_boton_operador">#FFFFFFFF</color>
+</resources>

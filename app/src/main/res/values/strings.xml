@@ -1,0 +1,55 @@
+<resources>
+<string name="app_name">Calculadora</string>
+
+<!-- Pantalla -->
+<string name="pantalla_inicial" translatable="false">0</string>
+<string name="error">Error</string>
+
+<!-- Números -->
+<string name="cero" translatable="false">0</string>
+<string name="uno" translatable="false">1</string>
+<string name="dos" translatable="false">2</string>
+<string name="tres" translatable="false">3</string>
+<string name="cuatro" translatable="false">4</string>
+<string name="cinco" translatable="false">5</string>
+<string name="seis" translatable="false">6</string>
+<string name="siete" translatable="false">7</string>
+<string name="ocho" translatable="false">8</string>
+<string name="nueve" translatable="false">9</string>
+<string name="punto" translatable="false">.</string>
+
+<!-- Operaciones básicas -->
+<string name="suma" translatable="false">+</string>
+<string name="resta" translatable="false">−</string>
+<string name="multiplicacion" translatable="false">×</string>
+<string name="division" translatable="false">÷</string>
+<string name="igual" translatable="false">=</string>
+<string name="porcentaje" translatable="false">%</string>
+<string name="cambio_signo" translatable="false">±</string>
+<string name="limpiar" translatable="false">C</string>
+<string name="borrar" translatable="false">⌫</string>
+
+<!-- Operaciones científicas -->
+<string name="seno" translatable="false">sin</string>
+<string name="coseno" translatable="false">cos</string>
+<string name="tangente" translatable="false">tan</string>
+<string name="logaritmo_neperiano" translatable="false">ln</string>
+<string name="logaritmo" translatable="false">log</string>
+<string name="raiz" translatable="false">√</string>
+<string name="cuadrado" translatable="false">x²</string>
+<string name="cubo" translatable="false">x³</string>
+<string name="potencia" translatable="false">xʸ</string>
+<string name="inverso" translatable="false">1/x</string>
+<string name="factorial" translatable="false">n!</string>
+<string name="diez_elevado" translatable="false">10ˣ</string>
+<string name="pi" translatable="false">π</string>
+<string name="numero_e" translatable="false">e</string>
+<string name="e_elevado" translatable="false">eˣ</string>
+
+<!-- Avisos -->
+<string name="snack_division_cero">No se puede dividir entre cero</string>
+<string name="snack_raiz_negativa">No existe la raíz de un número negativo</string>
+<string name="snack_logaritmo">El logaritmo solo existe para números mayores que 0</string>
+<string name="snack_factorial">El factorial solo existe para enteros entre 0 y 170</string>
+<string name="snack_operacion_invalida">Operación no válida</string>
+</resources>

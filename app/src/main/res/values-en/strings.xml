@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">Calculator</string>
+<string name="error">Error</string>
+
+<string name="snack_division_cero">Cannot divide by zero</string>
+<string name="snack_raiz_negativa">Square root of a negative number does not exist</string>
+<string name="snack_logaritmo">Logarithm only exists for numbers greater than 0</string>
+<string name="snack_factorial">Factorial only exists for integers between 0 and 170</string>
+<string name="snack_operacion_invalida">Invalid operation</string>
+</resources>
