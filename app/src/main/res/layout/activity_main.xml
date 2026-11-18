@@ -2,18 +2,379 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
-    <TextView
+    <!-- GUÍAS HORIZONTALES (filas) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaPantalla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.30" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaFila2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.44" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaFila3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.58" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaFila4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaFila5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <!-- GUÍAS VERTICALES (columnas) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaColumna2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaColumna3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiaColumna4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <!-- PANTALLA -->
+    <TextView
+        android:id="@+id/textResultado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:gravity="end"
+        android:text="@string/pantalla_inicial"
+        android:textColor="@color/texto_pantalla"
+        android:textSize="64sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaPantalla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textOperacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:gravity="end"
+        android:textColor="@color/texto_operacion"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/textResultado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- FILA 1: C ⌫ % ÷ -->
+    <Button
+        android:id="@+id/btnLimpiar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_funcion"
+        android:text="@string/limpiar"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila2"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guiaPantalla" />
+
+    <Button
+        android:id="@+id/btnBorrar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_funcion"
+        android:text="@string/borrar"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila2"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna3"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna2"
+        app:layout_constraintTop_toBottomOf="@id/guiaPantalla" />
+
+    <Button
+        android:id="@+id/btnPorcentaje"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_funcion"
+        android:text="@string/porcentaje"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila2"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna4"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna3"
+        app:layout_constraintTop_toBottomOf="@id/guiaPantalla" />
+
+    <Button
+        android:id="@+id/btnDivision"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_operador"
+        android:text="@string/division"
+        android:textColor="@color/texto_boton_operador"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna4"
+        app:layout_constraintTop_toBottomOf="@id/guiaPantalla" />
+
+    <!-- FILA 2: 7 8 9 × -->
+    <Button
+        android:id="@+id/btnSiete"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/siete"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila3"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila2" />
+
+    <Button
+        android:id="@+id/btnOcho"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/ocho"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila3"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna3"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna2"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila2" />
+
+    <Button
+        android:id="@+id/btnNueve"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/nueve"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila3"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna4"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna3"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila2" />
+
+    <Button
+        android:id="@+id/btnMultiplicacion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_operador"
+        android:text="@string/multiplicacion"
+        android:textColor="@color/texto_boton_operador"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna4"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila2" />
+
+    <!-- FILA 3: 4 5 6 − -->
+    <Button
+        android:id="@+id/btnCuatro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/cuatro"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila4"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila3" />
+
+    <Button
+        android:id="@+id/btnCinco"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/cinco"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila4"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna3"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna2"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila3" />
+
+    <Button
+        android:id="@+id/btnSeis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/seis"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila4"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna4"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna3"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila3" />
+
+    <Button
+        android:id="@+id/btnResta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_operador"
+        android:text="@string/resta"
+        android:textColor="@color/texto_boton_operador"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna4"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila3" />
+
+    <!-- FILA 4: 1 2 3 + -->
+    <Button
+        android:id="@+id/btnUno"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/uno"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila5"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila4" />
+
+    <Button
+        android:id="@+id/btnDos"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/dos"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila5"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna3"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna2"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila4" />
+
+    <Button
+        android:id="@+id/btnTres"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/tres"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila5"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna4"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna3"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila4" />
+
+    <Button
+        android:id="@+id/btnSuma"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_operador"
+        android:text="@string/suma"
+        android:textColor="@color/texto_boton_operador"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/guiaFila5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna4"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila4" />
+
+    <!-- FILA 5: ± 0 . = -->
+    <Button
+        android:id="@+id/btnCambioSigno"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_funcion"
+        android:text="@string/cambio_signo"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila5" />
+
+    <Button
+        android:id="@+id/btnCero"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/cero"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna3"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna2"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila5" />
+
+    <Button
+        android:id="@+id/btnPunto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_numero"
+        android:text="@string/punto"
+        android:textColor="@color/texto_boton"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guiaColumna4"
+        app:layout_constraintStart_toStartOf="@id/guiaColumna3"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila5" />
+
+    <Button
+        android:id="@+id/btnIgual"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/boton_igual"
+        android:text="@string/igual"
+        android:textColor="@color/texto_boton_operador"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@id/guiaColumna4"
+        app:layout_constraintTop_toBottomOf="@id/guiaFila5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
