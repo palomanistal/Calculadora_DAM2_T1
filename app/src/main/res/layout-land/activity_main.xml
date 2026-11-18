@@ -96,7 +96,7 @@
         android:gravity="end"
         android:text="@string/pantalla_inicial"
         android:textColor="@color/texto_pantalla"
-        android:textSize="48sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@id/guiaPantalla"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
