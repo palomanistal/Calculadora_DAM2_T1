@@ -6,8 +6,17 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.paloma.calculadora.databinding.ActivityMainBinding
+import kotlin.math.E
+import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.ln
+import kotlin.math.log10
+import kotlin.math.pow
 import kotlin.math.round
+import kotlin.math.sin
+import kotlin.math.sqrt
+import kotlin.math.tan
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -50,6 +59,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.btnBorrar.setOnClickListener(this)
         binding.btnCambioSigno.setOnClickListener(this)
         binding.btnPorcentaje.setOnClickListener(this)
+        // FASE 5: científicos (solo existen en horizontal -> null safety con ?.)
+        binding.btnSeno?.setOnClickListener(this)
+        binding.btnCoseno?.setOnClickListener(this)
+        binding.btnTangente?.setOnClickListener(this)
+        binding.btnLogaritmoNeperiano?.setOnClickListener(this)
+        binding.btnLogaritmo?.setOnClickListener(this)
+        binding.btnRaiz?.setOnClickListener(this)
+        binding.btnCuadrado?.setOnClickListener(this)
+        binding.btnCubo?.setOnClickListener(this)
+        binding.btnPotencia?.setOnClickListener(this)
+        binding.btnInverso?.setOnClickListener(this)
+        binding.btnFactorial?.setOnClickListener(this)
+        binding.btnDiezElevado?.setOnClickListener(this)
+        binding.btnPi?.setOnClickListener(this)
+        binding.btnNumeroE?.setOnClickListener(this)
+        binding.btnEElevado?.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {
@@ -79,6 +104,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.btnBorrar.id -> borrar()
             binding.btnCambioSigno.id -> cambiarSigno()
             binding.btnPorcentaje.id -> porcentaje()
+
+            // FASE 5: científicos
+            binding.btnPotencia?.id -> elegirOperacion((p0 as Button).id, resources.getString(R.string.simbolo_potencia))
+            binding.btnPi?.id -> mostrarResultado(PI)
+            binding.btnNumeroE?.id -> mostrarResultado(E)
+            binding.btnSeno?.id -> operacionCientifica(p0 as Button)
+            binding.btnCoseno?.id -> operacionCientifica(p0 as Button)
+            binding.btnTangente?.id -> operacionCientifica(p0 as Button)
+            binding.btnLogaritmoNeperiano?.id -> operacionCientifica(p0 as Button)
+            binding.btnLogaritmo?.id -> operacionCientifica(p0 as Button)
+            binding.btnRaiz?.id -> operacionCientifica(p0 as Button)
+            binding.btnCuadrado?.id -> operacionCientifica(p0 as Button)
+            binding.btnCubo?.id -> operacionCientifica(p0 as Button)
+            binding.btnInverso?.id -> operacionCientifica(p0 as Button)
+            binding.btnFactorial?.id -> operacionCientifica(p0 as Button)
+            binding.btnDiezElevado?.id -> operacionCientifica(p0 as Button)
+            binding.btnEElevado?.id -> operacionCientifica(p0 as Button)
         }
     }
 
@@ -105,7 +147,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    // ---------- OPERACIONES ----------
+    // ---------- OPERACIONES DE DOS NÚMEROS ----------
 
     private fun elegirOperacion(idOperacion: Int, simbolo: String) {
         // Si ya había una operación y se ha escrito el segundo número, la resolvemos primero (2 + 3 + ...)
@@ -129,11 +171,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        // FASE 5: un número negativo elevado a un decimal no existe, ej. (-8)^0.5
+        if (operacion == binding.btnPotencia?.id && primerNumero < 0 && segundoNumero % 1 != 0.0) {
+            mostrarAviso(R.string.snack_operacion_invalida)
+            mostrarError()
+            return
+        }
+
         val resultado = when (operacion) {
             binding.btnSuma.id -> primerNumero + segundoNumero
             binding.btnResta.id -> primerNumero - segundoNumero
             binding.btnMultiplicacion.id -> primerNumero * segundoNumero
             binding.btnDivision.id -> primerNumero / segundoNumero
+            binding.btnPotencia?.id -> primerNumero.pow(segundoNumero)
             else -> segundoNumero
         }
 
@@ -141,6 +191,62 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "${binding.textOperacion.text} ${formatear(segundoNumero)} ${resources.getString(R.string.igual)}"
         operacion = 0
         mostrarResultado(resultado)
+    }
+
+    // ---------- FASE 5: OPERACIONES DE UN NÚMERO ----------
+
+    private fun operacionCientifica(boton: Button) {
+        val idBoton = boton.id
+        val nombre = boton.text.toString()
+        val numero = leerPantalla() ?: return
+
+        // 1. Comprobamos los casos imposibles antes de calcular
+        val aviso: Int? = when (idBoton) {
+            binding.btnRaiz?.id -> if (numero < 0) R.string.snack_raiz_negativa else null
+            binding.btnLogaritmo?.id -> if (numero <= 0) R.string.snack_logaritmo else null
+            binding.btnLogaritmoNeperiano?.id -> if (numero <= 0) R.string.snack_logaritmo else null
+            binding.btnInverso?.id -> if (numero == 0.0) R.string.snack_division_cero else null
+            binding.btnFactorial?.id ->
+                if (numero < 0 || numero > 170 || numero % 1 != 0.0) R.string.snack_factorial else null
+            binding.btnTangente?.id -> if (abs(numero % 180) == 90.0) R.string.snack_operacion_invalida else null
+            else -> null
+        }
+        if (aviso != null) {
+            mostrarAviso(aviso)
+            mostrarError()
+            return
+        }
+
+        // 2. Calculamos (sin, cos y tan en grados: pasamos a radianes con * PI / 180)
+        val resultado = when (idBoton) {
+            binding.btnSeno?.id -> sin(numero * PI / 180)
+            binding.btnCoseno?.id -> cos(numero * PI / 180)
+            binding.btnTangente?.id -> tan(numero * PI / 180)
+            binding.btnLogaritmoNeperiano?.id -> ln(numero)
+            binding.btnLogaritmo?.id -> log10(numero)
+            binding.btnRaiz?.id -> sqrt(numero)
+            binding.btnCuadrado?.id -> numero * numero
+            binding.btnCubo?.id -> numero * numero * numero
+            binding.btnInverso?.id -> 1 / numero
+            binding.btnFactorial?.id -> factorial(numero.toInt())
+            binding.btnDiezElevado?.id -> 10.0.pow(numero)
+            binding.btnEElevado?.id -> E.pow(numero)
+            else -> numero
+        }
+
+        // 3. Mostramos la operación arriba (solo si no hay otra operación pendiente)
+        if (operacion == 0) {
+            binding.textOperacion.text = "$nombre(${formatear(numero)}) ${resources.getString(R.string.igual)}"
+        }
+        mostrarResultado(resultado)
+    }
+
+    private fun factorial(n: Int): Double {
+        var resultado = 1.0
+        for (i in 1..n) {
+            resultado *= i
+        }
+        return resultado
     }
 
     // ---------- FUNCIONES ----------
@@ -181,15 +287,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun leerPantalla(): Double? = binding.textResultado.text.toString().toDoubleOrNull()
 
     private fun mostrarResultado(numero: Double) {
+        // FASE 5: si el resultado no cabe en un Double (ej. 10^400), es un error
+        if (abs(numero) > 1e308) {
+            mostrarAviso(R.string.snack_operacion_invalida)
+            mostrarError()
+            return
+        }
         binding.textResultado.text = formatear(numero)
         empezarNumeroNuevo = true
     }
 
     private fun formatear(numero: Double): String {
+        // Los números enormes los dejamos tal cual (se verán con E, ej. 1.0E20)
+        if (abs(numero) >= 1e15) return numero.toString()
         // Redondeamos a 9 decimales para evitar cosas como 0.1 + 0.2 = 0.30000000000000004
         val redondeado = round(numero * 1000000000) / 1000000000
         // Si es entero, lo mostramos sin ".0"
-        return if (redondeado % 1 == 0.0 && abs(redondeado) < 1e15) {
+        return if (redondeado % 1 == 0.0) {
             redondeado.toLong().toString()
         } else {
             redondeado.toString()

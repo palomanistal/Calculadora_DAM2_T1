@@ -39,6 +39,7 @@
 <string name="cuadrado" translatable="false">x²</string>
 <string name="cubo" translatable="false">x³</string>
 <string name="potencia" translatable="false">xʸ</string>
+<string name="simbolo_potencia" translatable="false">^</string>
 <string name="inverso" translatable="false">1/x</string>
 <string name="factorial" translatable="false">n!</string>
 <string name="diez_elevado" translatable="false">10ˣ</string>
